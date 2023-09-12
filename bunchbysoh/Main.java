@@ -9,12 +9,18 @@ public class Main {
 
   static CountsBySoH countBatteriesByHealth(int[] presentCapacities) {
     CountsBySoH counts = new CountsBySoH();
-    for (int i = 0; i < presentCapacities.length; i++) {
-            double sohPercentage = (presentCapacities[i] / ratedCapacity) * 100.0;
+   // Rated capacity of a new battery
+        int ratedCapacity = 120;
 
-            if (sohPercentage >= 90.0) {
+        // Iterate through present capacities
+        for (int presentCapacity : presentCapacities) {
+            // Calculate SoH
+            double soh = (presentCapacity / (double) ratedCapacity) * 100;
+
+            // Classify batteries
+            if (soh > 80) {
                 counts.healthy++;
-            } else if (sohPercentage >= 70.0) {
+            } else if (soh >= 63 && soh <= 80) {
                 counts.exchange++;
             } else {
                 counts.failed++;
